@@ -10,13 +10,14 @@ function naturalNumber(n,m) {
 
     let resArr = [];
 
-    for (let i = 1; i <= n; i++) {
+    let i = 1;
+
+    while (resArr.length < n) {
         if (i ** 2 >= m) resArr.push(`${i}`);
+        i++;    
     }
 
     const res = resArr.join(', ');
-
-    if (res === '') return 'Natural number not found';
     
     return res;
 }
