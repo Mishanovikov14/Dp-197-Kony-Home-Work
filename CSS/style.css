@@ -1,8 +1,19 @@
 .card {
+    display: inline-block;
     margin: 1rem;
     background-color: rgba(207, 204, 204, 0.932);
-    width: 430px;
+    width: 31%;
+    height: 50rem;
     border: 1px solid rgba(129, 129, 129, 0.932);
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cards {
+    padding: 1rem 1rem;
 }
 
 .card:hover {
