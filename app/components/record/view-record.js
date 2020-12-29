@@ -1,6 +1,15 @@
 export default class ViewRecord {
 
     htmlCards = document.querySelector('.cards');
+    htmlSort = document.querySelector('.select-sort');
+    htmlFilter = document.querySelector('.select-filter');
+    htmlSearch = document.querySelector('.input-search');
+
+    constructor(cbSort, cbSearch, cbFilter) {
+      this.htmlSort.addEventListener('input', cbSort);
+      this.htmlSearch.addEventListener('input', cbSearch);
+      this.htmlFilter.addEventListener('input', cbFilter);
+    }
 
     render = arr => {
         this.htmlCards.innerHTML = arr.map(this.renderCard).join('');
@@ -30,7 +39,12 @@ export default class ViewRecord {
             <p><span class="has-text-weight-bold">Product name:</span> <span>${ productName }</span></p>
             <p><span class="has-text-weight-bold">Manufacture:</span> <span>${ manufacture }</span></p>
             <p><span class="has-text-weight-bold">Category:</span> <span>${ category }</span></p>
-            <p><span class="has-text-weight-bold">Ingridients:</span> <span>${ ingridients }</span></p>
+            <p><span class="has-text-weight-bold">Ingridients:</p>
+            <div class="field">
+                <div class="control">
+                    <textarea class="textarea is-info" placeholder="Info textarea">${ ingridients }</textarea>
+                </div>
+            </div>
             <p><span class="has-text-weight-bold">Amount:</span> <span>${ amount }</span></p>
             <p><span class="has-text-weight-bold">Units:</span> <span>${ units }</span></p>
             <p><span class="has-text-weight-bold">Price:</span> <span>${ price }$</span></p>
