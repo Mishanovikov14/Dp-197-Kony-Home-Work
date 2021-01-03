@@ -1,22 +1,58 @@
-.card {
-    display: inline-block;
-    margin: 1rem;
-    background-color: rgba(207, 204, 204, 0.932);
-    width: 45%;
-    border: 1px solid rgba(129, 129, 129, 0.932);
+select {
+  max-width: 20rem;
+  margin: 1rem;
+  margin-left: 0;
+  margin-right: 3rem;
 }
 
-.wrapper {
-    display: flex;
-    justify-content: space-between;
+.input-search {
+  min-width: 12rem;
+}
+
+.navbar-brand {
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+  margin-right: 3rem;
+  font-size: 1.25rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navbar-collapse {
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.blue-text {
+  color: blue;
 }
 
 .cards {
-    padding: 1rem 1rem;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.card:hover {
-    box-shadow: 0px 0px 5px 3px rgb(88, 76, 255);
+.card-m {
+  margin-bottom: 30px;
+}
+
+.card-body {
+  display:flex;
+  flex-direction: column;
+  background-color: rgb(228, 222, 222);
+}
+
+.parent {
+  flex-grow: 1;
+}
+
+.links {
+  margin-top: 5px;
+}
+
+.card-img-top {
+  max-height: 269px;
 }
 
 .sk-folding-cube {

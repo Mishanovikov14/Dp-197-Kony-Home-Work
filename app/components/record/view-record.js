@@ -18,29 +18,27 @@ export default class ViewRecord {
         imgLink}) => {
 
         return `
-        <div class="card">
-        <div class="card-image">
-              <figure class="image is-4by3">
-                <img src="${imgLink}" alt="Placeholder image">
-              </figure>
+        <div class="card-m col-lg-4 col-md-6 col-xs-12">
+          <div class="card shadow h-100">
+            <img src="${imgLink}" class="card-img-top" alt="img">
+            <div class="card-body">
+              <div class="parent">
+                <h3 class="card-title text-center text-decoration-underline">${ productName }</h3>
+                <p class="card-text"><strong>ID:</strong> ${ id }</p>
+                <p class="card-text"><strong>Manufacture:</strong> ${ manufacture }</p>
+                <p class="card-text"><strong>Category:</strong> ${ category }</p>
+                <p class="card-text"><strong>Amount:</strong> ${ amount }</p>
+                <p class="card-text"><strong>Units:</strong> ${ units }</p>
+                <h4 class="text-center font-weight-bold blue-text"><strong>${ price }$</strong></h4>
+              </div>
+              <div class="links text-center">
+                <a href="#" class="card-link">Add to cart</a>
+                <a href="#" class="card-link">More info</a>
+              </div>
             </div>
-        <div class="card-content">
-          <div class="content">
-            <p><span class="has-text-weight-bold">ID:</span> <span>${ id }</span></p>
-            <p><span class="has-text-weight-bold">Product name:</span> <span>${ productName }</span></p>
-            <p><span class="has-text-weight-bold">Manufacture:</span> <span>${ manufacture }</span></p>
-            <p><span class="has-text-weight-bold">Category:</span> <span>${ category }</span></p>
-            <p><span class="has-text-weight-bold">Ingridients:</p>
-            <div class="field">
-                <div class="control">
-                    <textarea class="textarea is-info" placeholder="Info textarea">${ ingridients }</textarea>
-                </div>
-            </div>
-            <p><span class="has-text-weight-bold">Amount:</span> <span>${ amount }</span></p>
-            <p><span class="has-text-weight-bold">Units:</span> <span>${ units }</span></p>
-            <p><span class="has-text-weight-bold">Price:</span> <span>${ price }$</span></p>
           </div>
-        </div>
-      </div> `;
+        </div>`;
     }
 }
+
+//<p class="card-text">${ ingridients }</p> добавить!!!!

@@ -3,25 +3,14 @@ export default class ViewFilters {
 
     constructor(cbSort, cbSearch, cbFilter) {
         this.htmlheader.innerHTML = `
-            <div class="field">
-                <div class="control">
-                    <input class="input is-danger input-search" type="text" placeholder="Search">
-                </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <div class="select is-info">
-                        <select class="select-sort">
-                            <option value="price-exp">Expensive first</option>
-                            <option value="price-cheap">Cheap first</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <div class="select is-info">
-                        <select class="select-filter">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a href="" class="navbar-brand">BestShop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                        <select class="form-select select-filter" aria-label="Default select example">
                             <option>Select category</option>
                             <option value="category-beverages">Beverages</option>
                             <option value="category-tea">Tea & Coffee</option>
@@ -34,16 +23,24 @@ export default class ViewFilters {
                             <option value="category-eggs">Dairy, Eggs & Cheese</option>
                             <option value="category-sauces">Sauces</option>
                         </select>
-                    </div>
+                        <select class="form-select select-sort" aria-label="Default select example">
+                                <option value="price-exp">Expensive first</option>
+                                <option value="price-cheap">Cheap first</option>
+                        </select>
+                    <form class="d-flex">
+                        <input class="form-control me-4 input-search" type="search" placeholder="Search">
+                        <button class="btn btn-outline-danger btn-search">Search</button>
+                    </form>
                 </div>
-            </div>`;
+            </div>
+        </nav>`;
 
         this.htmlSort = document.querySelector('.select-sort');
         this.htmlFilter = document.querySelector('.select-filter');
-        this.htmlSearch = document.querySelector('.input-search');
+        this.htmlSearch = document.querySelector('.btn-search');
 
         this.htmlSort.addEventListener('input', cbSort);
-        this.htmlSearch.addEventListener('input', cbSearch);
+        this.htmlSearch.addEventListener('click', cbSearch);
         this.htmlFilter.addEventListener('input', cbFilter);
     }
 }

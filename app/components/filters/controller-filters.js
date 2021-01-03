@@ -1,6 +1,5 @@
 import ViewFilters from "./view-filters.js";
 import ModelFilters from "./model-filters.js";
-import events from "../../helpers/events.js";
 
 export default class ControllerFilters {
     constructor({ subscribe, events, notify }) {
@@ -23,7 +22,7 @@ export default class ControllerFilters {
     }
 
     onSearch = e => {
-        const records = this.model.search(e.target.value);
+        const records = this.model.search(document.querySelector('.input-search').value);
 
         this.notify(this.events.AFTER_SEARCH, records);
     }
