@@ -2,38 +2,29 @@ import ModelRecord from './model-record.js';
 import ViewRecord from './view-record.js';
 
 export default class ControllerRecord {
-    constructor({ notify }) {
+    constructor({ notify, events, subscribe }) {
         this.model = new ModelRecord();
-        this.view = new ViewRecord(this.onSort, this.onSearch, this.onFilter);
+        this.view = new ViewRecord();
 
         this.init();
 
         this.notify = notify;
+        this.events = events;
+
+        subscribe(events.AFTER_SORT, this.onFilters);
+        subscribe(events.AFTER_SEARCH, this.onFilters)
+        subscribe(events.AFTER_FILTER, this.onFilters)
     }
 
     init = () => {
         this.model.loadRecords()
             .then(data => {
                this.view.render(data); 
-               this.notify('Loaded_data', data);
+               this.notify(this.events.LOADED_DATA, data);
             });
     }
 
-    onSort = e => {
-        const records = this.model.sort(e.target.value);
-
-        this.view.render(records);
-    }
-
-    onSearch = e => {
-        const records = this.model.search(e.target.value);
-
-        this.view.render(records);
-    }
-
-    onFilter = e => {
-        const records = this.model.filterProduct(e.target.value);
-
-        this.view.render(records);
+    onFilters = data => {
+        this.view.render(data); 
     }
 }
