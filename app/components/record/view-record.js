@@ -19,7 +19,7 @@ export default class ViewRecord {
 
         return `
         <div class="card-m col-lg-4 col-md-6 col-xs-12">
-          <div class="card shadow h-100">
+          <div class="card h-100" id="${ id }" data-bs-toggle="modal" data-bs-target="#cardModal">
             <img src="${imgLink}" class="card-img-top" alt="img">
             <div class="card-body">
               <div class="parent">
@@ -32,8 +32,8 @@ export default class ViewRecord {
                 <h4 class="text-center font-weight-bold blue-text"><strong>${ price }$</strong></h4>
               </div>
               <div class="links text-center">
-                <a href="#" class="card-link">Add to cart</a>
-                <a href="#" class="card-link">More info</a>
+                <button type="button" class="btn btn-outline-primary">Add to cart</button>
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cardModal">More info</button>
               </div>
             </div>
           </div>

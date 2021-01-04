@@ -28,6 +28,10 @@ select {
   color: blue;
 }
 
+.card:hover {
+  box-shadow: 0 0 5px 2px rgba(24, 8, 251);
+}
+
 .cards {
   margin-top: 30px;
   margin-bottom: 30px;
