@@ -21,7 +21,7 @@ export default class ControllerFilters {
         this.notify(this.events.AFTER_SORT, records);
     }
 
-    onSearch = e => {
+    onSearch = () => {
         const records = this.model.search(document.querySelector('.input-search').value);
 
         this.notify(this.events.AFTER_SEARCH, records);

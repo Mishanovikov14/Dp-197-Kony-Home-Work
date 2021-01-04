@@ -1,18 +1,18 @@
-import ViewCard from "./view-card.js";
-import ModelCard from "./model-card.js";
+// import ViewCard from "./view-card.js";
+// import ModelCard from "./model-card.js";
 
-export default class ControllerCard {
-    constructor({ subscribe, events }) {
-        this.view = new ViewCard();
-        this.model = new ModelCard();
+// export default class ControllerCard {
+//     constructor({ subscribe, events }) {
+//         this.view = new ViewCard();
+//         this.model = new ModelCard();
 
-        subscribe(events.LOADED_DATA, this.onLoad);
+//         subscribe(events.LOADED_DATA, this.onLoad);
 
-        this.events = events;
-        this.view.render();
-    }
+//         this.events = events;
+//         this.view.render();
+//     }
 
-    onLoad = data => {
-        this.model.records = data;
-    }
-} 
+//     onLoad = data => {
+//         this.model.records = data;
+//     }
+// } 

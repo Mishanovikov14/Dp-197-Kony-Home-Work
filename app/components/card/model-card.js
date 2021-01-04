@@ -1,4 +1,4 @@
-export default class ModelCard {
-    records = [];
+// export default class ModelCard {
+//     records = [];
 
-}
+// }

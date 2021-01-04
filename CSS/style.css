@@ -28,6 +28,19 @@ select {
   color: blue;
 }
 
+.modal-dialog {
+  margin: 10vh auto;
+}
+
+.modal-header {
+  justify-content: center;
+}
+
+.modal-title {
+  text-align: center;
+  flex-grow: 1;
+}
+
 .card:hover {
   box-shadow: 0 0 5px 2px rgba(24, 8, 251);
 }
