@@ -24,17 +24,17 @@ export default class ViewRecord {
             <div class="card-body">
               <div class="parent">
                 <h3 class="card-title text-center text-decoration-underline">${ productName }</h3>
-                <p class="card-text"><strong>Manufacture:</strong> ${ manufacture }</p>
-                <p class="card-text"><strong>Category:</strong> ${ category }</p>
-                <h4 class="text-center font-weight-bold blue-text"><strong>${ price }$</strong></h4>
+                <p class="card-text text-center fs-5"><strong>Category:</strong> ${ category }</p>
+                <h2 class="text-center font-weight-bold blue-text"><strong>${ price }$</strong></h2>
               </div>
-              <div class="links text-center">
-                <button type="button" class="btn btn-outline-primary">Add to cart</button>
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#с${ id }">More info</button>
+              <div class="text-center">
+                <button type="button" class="btn btn-card btn-outline-primary">Add to cart</button>
+                <button type="button" class="btn btn-card btn-outline-primary" data-bs-toggle="modal" data-bs-target="#с${ id }">More info</button>
               </div>
             </div>
           </div>
         </div>
+        
         <div class="modal fade" id="с${ id }" tabindex="-1" aria-labelledby="cardModalLable" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
