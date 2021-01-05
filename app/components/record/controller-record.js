@@ -11,20 +11,22 @@ export default class ControllerRecord {
         this.notify = notify;
         this.events = events;
 
-        subscribe(events.AFTER_SORT, this.onFilters);
-        subscribe(events.AFTER_SEARCH, this.onFilters)
-        subscribe(events.AFTER_FILTER, this.onFilters)
+        subscribe(events.AFTER_SORT, this.onRender);
+        subscribe(events.AFTER_SEARCH, this.onRender);
+        subscribe(events.AFTER_FILTER, this.onRender);
+        subscribe(events.PAG, this.onRender);
     }
 
     init = () => {
         this.model.loadRecords()
             .then(data => {
-               this.view.render(data); 
+            //    this.view.render(data); 
                this.notify(this.events.LOADED_DATA, data);
             });
     }
 
-    onFilters = data => {
+    onRender = data => {
         this.view.render(data); 
     }
+
 }

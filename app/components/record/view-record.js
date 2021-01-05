@@ -18,7 +18,7 @@ export default class ViewRecord {
         imgLink}) => {
 
         return `
-        <div class="card-m col-lg-4 col-md-6 col-xs-12">
+        <div class="card-m col-xl-3 col-lg-4 col-md-6 col-xs-12">
           <div class="card h-100" data-bs-toggle="modal" data-bs-target="#с${ id }">
             <img src="${imgLink}" class="card-img-top" alt="img">
             <div class="card-body">
