@@ -1,8 +1,11 @@
 export default class ModelPagination {
     records = [];
 
-    cardsOnPage = 4;
-    countOfPages = Math.ceil(this.records.length / this.cardsOnPage);
+    cardsOnPage = 12;
+
+    getCountOfPages = () => {
+        return Math.ceil(this.records.length / this.cardsOnPage);
+    } 
 
     render = () => {
         return this.records.slice(0, this.cardsOnPage);

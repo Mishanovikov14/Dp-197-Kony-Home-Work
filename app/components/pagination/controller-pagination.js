@@ -3,7 +3,7 @@ import ModelPagination from "./model-pagination.js";
 
 export default class ControllerPagination {
     constructor({ subscribe, events, notify }) {
-        this.view = new ViewPagination(this.onPug, this.count);
+        this.view = new ViewPagination(this.onPug, this.getCountOfPages);
         this.model = new ModelPagination();
 
         this.count = this.model.countOfPages;
@@ -38,5 +38,9 @@ export default class ControllerPagination {
         const records = this.model.pug(e.target.dataset.value);
 
         this.notify(this.events.PAG, records);
+    }
+
+    getCountOfPages = () => {
+        return this.model.getCountOfPages();
     }
 }

@@ -5,7 +5,7 @@ export default class ViewPagination {
         this.pag = () => {
             let text = ``;
             console.log(count);
-            for (let i = 1; i <= 5; i++) {
+            for (let i = 1; i <= count; i++) {
                 text +=  `
                 <li class="page-item">
                     <a class="page-link pugl" href="#" tabindex="-1" data-value="${ i }" aria-disabled="true">${ i }</a>
