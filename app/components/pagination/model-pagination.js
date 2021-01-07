@@ -3,15 +3,15 @@ export default class ModelPagination {
 
     cardsOnPage = 12;
 
-    getCountOfPages = () => {
+    initCountOfPages = () => {
         return Math.ceil(this.records.length / this.cardsOnPage);
-    } 
+    }
 
     render = () => {
         return this.records.slice(0, this.cardsOnPage);
     }
 
-    pug = (pageNum) => {
+    pag = (pageNum) => {
         let start = (pageNum - 1) * this.cardsOnPage;
         let end = start + this.cardsOnPage;
 

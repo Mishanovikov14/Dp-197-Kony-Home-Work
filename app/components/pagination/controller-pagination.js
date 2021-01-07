@@ -3,23 +3,26 @@ import ModelPagination from "./model-pagination.js";
 
 export default class ControllerPagination {
     constructor({ subscribe, events, notify }) {
-        this.view = new ViewPagination(this.onPug, this.getCountOfPages);
+        this.view = new ViewPagination(this.onPag);
         this.model = new ModelPagination();
-
-        this.count = this.model.countOfPages;
+        
         this.events = events;
-
+        
         subscribe(events.LOADED_DATA, this.onLoad);
         subscribe(events.LOADED_DATA, this.onStart);
-
+        subscribe(events.LOADED_DATA, this.onRender);
+        
         subscribe(events.AFTER_SORT, this.onLoad);
         subscribe(events.AFTER_SORT, this.onStart);
-
+        subscribe(events.AFTER_SORT, this.onRender);
+        
         subscribe(events.AFTER_SEARCH, this.onLoad);
         subscribe(events.AFTER_SEARCH, this.onStart);
-
+        subscribe(events.AFTER_SEARCH, this.onRender);
+        
         subscribe(events.AFTER_FILTER, this.onLoad);
         subscribe(events.AFTER_FILTER, this.onStart);
+        subscribe(events.AFTER_FILTER, this.onRender);
         
         this.notify = notify;
     }
@@ -34,13 +37,13 @@ export default class ControllerPagination {
         this.notify(this.events.PAG, records);
     }
 
-    onPug = (e) => {
-        const records = this.model.pug(e.target.dataset.value);
+    onPag = (e) => {
+        const records = this.model.pag(e.target.dataset.value);
 
         this.notify(this.events.PAG, records);
     }
 
-    getCountOfPages = () => {
-        return this.model.getCountOfPages();
+    onRender = () => {
+        this.view.render(this.model.initCountOfPages());
     }
 }
