@@ -3,7 +3,7 @@ const events = {
     AFTER_SORT : 'Data after sorting',
     AFTER_SEARCH : 'Data after searching',
     AFTER_FILTER : 'Data after filtering',
-    PAG : 'PAginetion selected'
+    PAG : 'Paginetion selected'
 };
 
 export default events;

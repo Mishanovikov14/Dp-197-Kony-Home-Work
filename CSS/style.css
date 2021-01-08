@@ -81,6 +81,10 @@ h2 {
   height: 269px;
 }
 
+.btn-cart {
+  margin-left: 5px;
+}
+
 .sk-folding-cube {
     margin: 35vh auto;
     width: 90px;

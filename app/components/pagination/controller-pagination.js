@@ -3,7 +3,7 @@ import ModelPagination from "./model-pagination.js";
 
 export default class ControllerPagination {
     constructor({ subscribe, events, notify }) {
-        this.view = new ViewPagination(this.onPag);
+        this.view = new ViewPagination();
         this.model = new ModelPagination();
         
         this.events = events;
@@ -37,13 +37,13 @@ export default class ControllerPagination {
         this.notify(this.events.PAG, records);
     }
 
-    onPag = (e) => {
-        const records = this.model.pag(e.target.dataset.value);
-
-        this.notify(this.events.PAG, records);
-    }
-
     onRender = () => {
         this.view.render(this.model.initCountOfPages());
+        this.view.handle(this.onHandle);
+    }
+
+    onHandle = (e) => {
+        const pages = this.model.pag(e.target.dataset.value);
+        this.notify(this.events.PAG, pages);
     }
 }
