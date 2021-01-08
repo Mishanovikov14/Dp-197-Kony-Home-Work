@@ -3,7 +3,8 @@ const events = {
     AFTER_SORT : 'Data after sorting',
     AFTER_SEARCH : 'Data after searching',
     AFTER_FILTER : 'Data after filtering',
-    PAG : 'Paginetion selected'
+    PAG : 'Paginetion selected',
+    INFO_CART: 'Add info to cart window'
 };
 
 export default events;

@@ -76,4 +76,9 @@ export default class ModelRecord {
     
         return answ;
     }
+
+    getRecordById = id => {
+        console.log(id.slice(1));
+        return this.records.find(element => element.id == id.slice(1));
+    }
 }

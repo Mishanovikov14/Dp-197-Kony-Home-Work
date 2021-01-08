@@ -30,7 +30,7 @@ export default class ViewFilters {
                     <form class="d-flex">
                         <input class="form-control me-4 input-search" type="search" placeholder="Search">
                         <button class="btn btn-outline-danger btn-search">Search</button>
-                        <button class="btn btn-outline-danger btn-cart">Cart</button>
+                        <button class="btn btn-outline-danger btn-cart" data-bs-toggle="modal" data-bs-target="#cartDetails">Cart</button>
                     </form>
                 </div>
             </div>

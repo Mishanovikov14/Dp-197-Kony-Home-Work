@@ -4,7 +4,7 @@ import ViewRecord from './view-record.js';
 export default class ControllerRecord {
     constructor({ notify, events, subscribe }) {
         this.model = new ModelRecord();
-        this.view = new ViewRecord();
+        this.view = new ViewRecord(this.onCart);
 
         this.init();
 
@@ -29,4 +29,9 @@ export default class ControllerRecord {
         this.view.render(data); 
     }
 
+    onCart = e => {
+        const records = this.model.getRecordById(e.target.dataset.cartId);
+
+        this.notify(this.events.INFO_CART, records);
+    }
 }

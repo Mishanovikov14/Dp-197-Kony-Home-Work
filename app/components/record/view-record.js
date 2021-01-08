@@ -2,8 +2,14 @@ export default class ViewRecord {
 
     htmlCards = document.querySelector('.cards');
 
+    constructor(onCart) {
+      this.onCart = onCart;
+    }
+
     render = arr => {
         this.htmlCards.innerHTML = arr.map(this.renderCard).join('');
+
+        [...this.htmlCards.querySelectorAll('.card .btn-cart-info')].forEach(btn => btn.addEventListener('click', this.onCart));
     }
     
     renderCard = ({
@@ -19,7 +25,7 @@ export default class ViewRecord {
 
         return `
         <div class="card-m col-xl-3 col-lg-4 col-md-6 col-xs-12">
-          <div class="card h-100" data-bs-toggle="modal" data-bs-target="#с${ id }">
+          <div class="card h-100">
             <img src="${imgLink}" class="card-img-top" alt="img">
             <div class="card-body">
               <div class="parent">
@@ -28,8 +34,8 @@ export default class ViewRecord {
                 <h2 class="text-center font-weight-bold blue-text"><strong>${ price }$</strong></h2>
               </div>
               <div class="text-center">
-                <button type="button" class="btn btn-card btn-outline-primary">Add to cart</button>
-                <button type="button" class="btn btn-card btn-outline-primary" data-bs-toggle="modal" data-bs-target="#с${ id }">More info</button>
+                <button type="button" class="btn btn-card btn-primary btn-cart-info" data-cart-id="$${ id }">Add to cart</button>
+                <button type="button" class="btn btn-card btn-primary" data-bs-toggle="modal" data-bs-target="#с${ id }">More info</button>
               </div>
             </div>
           </div>
@@ -53,7 +59,7 @@ export default class ViewRecord {
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-secondary">Add to cart</button>
+                        <button class="btn btn-primary">Add to cart</button>
                     </div>
                 </div>
             </div>
