@@ -59,7 +59,7 @@ export default class ViewRecord {
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary btn-cart-info" data-cart-id="$${ id }">Add to cart</button>
+                        <button class="btn btn-primary btn-cart-info btn-info-cart" data-cart-id="$${ id }">Add to cart</button>
                     </div>
                 </div>
             </div>

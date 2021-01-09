@@ -16,6 +16,10 @@ export default class ModelCart {
                 count,
                 ...el
             })
+
+            if (!this.list.includes(el)) {
+                this.uniqList.delete(el);
+            }
         });
     }
 
@@ -39,13 +43,12 @@ export default class ModelCart {
     }
 
     deleteProd = id => {
-        console.log(this.renderList);
         const product = this.list.find(element => element.id == id.slice(1));
         const correctProd = (element) => element === product;
         while (this.list.some(correctProd)) {
             const productIndex = this.list.indexOf(product);
             this.list.splice(productIndex, 1);
         }
-        console.log(this.renderList);
+        console.log(this.list, this.uniqList);
     }
 }

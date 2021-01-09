@@ -64,21 +64,31 @@ export default class ViewCart {
     }
 
     renderList = (cartList, sum) => {
+        document.querySelector('.btn-cart-info').classList.remove("disabled");
+        document.querySelector('.btn-info-cart').classList.remove("disabled");
+        
         const htmlList = document.querySelector('#product-list');
         htmlList.innerHTML = ``;
-        cartList.forEach(({id, productName, price, count}) => {
+        cartList.forEach(({id, productName, price, count, amount}) => {
             const cartListItem = document.createElement('li');
             cartListItem.innerHTML = `
                 <h5>${productName}</h5>
                 <p>${price}$</p>
                 <div class="d-flex product-list--amount">
                     <button type="button" class="btn btn-primary btn-amount-minus" data-minus="$${ id }">-</button>
-                    <input class="text-center" value="${count}">
+                    <span class="text-center">${count}</span>
                     <button type="button" class="btn btn-primary btn-amount-plus" data-plus="$${ id }">+</button>
                 </div>
                 <button type="button" class="btn btn-danger btn-delete" data-delete="$${ id }">Delete</button>
              `;
-            htmlList.append(cartListItem);
+
+             
+             htmlList.append(cartListItem);
+             if (count === amount) {
+                 document.querySelector('.btn-amount-plus').classList.add("disabled");
+                 document.querySelector('.btn-cart-info').classList.add("disabled");
+                 document.querySelector('.btn-info-cart').classList.add("disabled");
+             }
         });
 
         const sumLi = document.createElement("h3");
