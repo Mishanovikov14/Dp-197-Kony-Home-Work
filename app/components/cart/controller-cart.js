@@ -21,7 +21,6 @@ export default class ControllerCart {
 
     render = () => {
         this.model.addToCart();
-        this.model.addToCart();
         this.view.renderCount(this.model.list.length);
         this.view.renderList(this.model.renderList, this.model.countSummary());
         if (this.model.list < 1) this.view.renderEmptyCart();

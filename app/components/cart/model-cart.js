@@ -16,10 +16,6 @@ export default class ModelCart {
                 count,
                 ...el
             })
-
-            if (!this.list.includes(el)) {
-                this.uniqList.delete(el);
-            }
         });
     }
 
@@ -35,11 +31,20 @@ export default class ModelCart {
     substrAmount = id => {
         const productIndex = this.list.indexOf(this.list.find(element => element.id == id.slice(1)));
         this.list.splice(productIndex, 1);
+        this.check();
     }
 
     addAmount = id => {
         const product = this.list.find(element => element.id == id.slice(1));
         this.list.push(product);
+    }
+
+    check = () => {
+        this.uniqList.forEach((el) => {
+            if (!this.list.includes(el)) {
+                this.uniqList.delete(el);
+            }
+        });  
     }
 
     deleteProd = id => {
@@ -49,6 +54,6 @@ export default class ModelCart {
             const productIndex = this.list.indexOf(product);
             this.list.splice(productIndex, 1);
         }
-        console.log(this.list, this.uniqList);
+        this.check();
     }
 }

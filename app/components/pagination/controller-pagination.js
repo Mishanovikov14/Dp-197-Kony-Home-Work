@@ -7,22 +7,17 @@ export default class ControllerPagination {
         this.model = new ModelPagination();
         
         this.events = events;
-        
-        subscribe(events.LOADED_DATA, this.onLoad);
-        subscribe(events.LOADED_DATA, this.onStart);
-        subscribe(events.LOADED_DATA, this.onRender);
-        
-        subscribe(events.AFTER_SORT, this.onLoad);
-        subscribe(events.AFTER_SORT, this.onStart);
-        subscribe(events.AFTER_SORT, this.onRender);
-        
-        subscribe(events.AFTER_SEARCH, this.onLoad);
-        subscribe(events.AFTER_SEARCH, this.onStart);
-        subscribe(events.AFTER_SEARCH, this.onRender);
-        
-        subscribe(events.AFTER_FILTER, this.onLoad);
-        subscribe(events.AFTER_FILTER, this.onStart);
-        subscribe(events.AFTER_FILTER, this.onRender);
+
+        this.onSubscribe = type => {
+            subscribe(type, this.onLoad);
+            subscribe(type, this.onStart);
+            subscribe(type, this.onRender);
+        }
+
+        this.onSubscribe(events.LOADED_DATA);
+        this.onSubscribe(events.AFTER_SORT);
+        this.onSubscribe(events.AFTER_SEARCH);
+        this.onSubscribe(events.AFTER_FILTER);
         
         this.notify = notify;
     }
