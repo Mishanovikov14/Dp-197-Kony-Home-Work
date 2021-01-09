@@ -10,6 +10,8 @@ export default class ViewPagination {
                 </li> `;
             }
 
+            if (count <= 1) text = ``;
+            
             return this.htmlPagination.innerHTML = text;
     }
 

@@ -8,6 +8,6 @@ import Publisher from './helpers/publisher.js';
 const publisher = new Publisher();
 const spinner = new ControllerSpinner(publisher.methods);
 const record = new ControllerRecord(publisher.methods);
+const filters = new ControllerFilters(publisher.methods);
 const cart = new ControllerCart(publisher.methods);
 const pagination = new ControllerPagination(publisher.methods);
-const filters = new ControllerFilters(publisher.methods);

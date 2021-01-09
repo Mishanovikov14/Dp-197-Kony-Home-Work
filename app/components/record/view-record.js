@@ -9,7 +9,7 @@ export default class ViewRecord {
     render = arr => {
         this.htmlCards.innerHTML = arr.map(this.renderCard).join('');
 
-        [...this.htmlCards.querySelectorAll('.card .btn-cart-info')].forEach(btn => btn.addEventListener('click', this.onCart));
+        [...this.htmlCards.querySelectorAll('.btn-cart-info')].forEach(btn => btn.addEventListener('click', this.onCart));
     }
     
     renderCard = ({
@@ -41,7 +41,7 @@ export default class ViewRecord {
           </div>
         </div>
         
-        <div class="modal fade" id="с${ id }" tabindex="-1" aria-labelledby="cardModalLable" aria-hidden="true">
+        <div class="modal fade card-modal" id="с${ id }" tabindex="-1" aria-labelledby="cardModalLable" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -59,7 +59,7 @@ export default class ViewRecord {
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary">Add to cart</button>
+                        <button class="btn btn-primary btn-cart-info" data-cart-id="$${ id }">Add to cart</button>
                     </div>
                 </div>
             </div>

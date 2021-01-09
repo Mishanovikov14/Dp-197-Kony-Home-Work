@@ -2,41 +2,63 @@ export default class ViewCart {
     htmlCartModal = document.querySelector('.modals');
 
     constructor() {
-        this.htmlCartModal.insertAdjacentHTML('beforeend', `
+        this.htmlCartModal.innerHTML = `
             <div class="modal fade" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                            <h3 class="modal-title" id="exampleModalLabel">Cart</h3>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-cart-body">
-                            <p class="test"></p>
+                            <h4 class="text-center">Your cart is empty</h4>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Bye</button>
                         </div>
                     </div>
                 </div>
             </div>
-        `);
+        `;
 
-        this.htmlCartContent = document.querySelector('#cartDetails .modal-cart-body');
-        this.test = document.querySelector('#cartDetails .test');
+        this.htmlCartBtn = document.querySelector('navbar-btn-container');
+        console.log(this.htmlCartBtn,  this.htmlCartModal);
     }
 
-    render = ({
-        id,
-        productName,
-        manufacture,
-        category,
-        ingridients,
-        amount,
-        units,
-        price,
-        imgLink}) => {
-        // this.htmlCartContent.innerHTML = Object.entries(data).map(([name, value]) => `<p>${ name } : ${ value }</p>`).join('');
-        this.test.innerText = `ID: ${id}`;
+    renderCart = (cartList, sum) => { 
+        this.htmlCartModal.innerHTML = `
+        <div class="modal fade" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="exampleModalLabel">Cart</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ol id="product-list" class="text-center"></ol>
+                        <h3 class="text-center">Summary: <span class="blue-text">${sum}$</span></h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Make an oreder</button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+        const htmlList = document.querySelector('#product-list');
+        cartList.forEach(({productName, price, count}) => {
+            const cartListItem = document.createElement('li');
+            cartListItem.innerHTML = `
+                <h5>${productName}</h5>
+                <p>${price} $</p>
+                <p>${count}</p>
+             `;
+            htmlList.append(cartListItem);
+        });
     }
+
+    renderCount = count => {
+        this.htmlCartBtn.innerText = `Cart (${ count })`;
+    };
 }

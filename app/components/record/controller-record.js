@@ -30,8 +30,8 @@ export default class ControllerRecord {
     }
 
     onCart = e => {
-        const records = this.model.getRecordById(e.target.dataset.cartId);
+        const product = this.model.getRecordById(e.target.dataset.cartId);
 
-        this.notify(this.events.INFO_CART, records);
+        this.notify(this.events.INFO_CART, product);
     }
 }

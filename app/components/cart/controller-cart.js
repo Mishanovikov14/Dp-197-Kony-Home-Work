@@ -12,6 +12,9 @@ export default class ControllerCart {
     }
 
     onCart = data => {
-        this.view.render(data);
+        this.model.addToCart(data);
+        // this.view.renderCount(this.model.list.length);
+        this.view.renderCart(this.model.renderList, this.model.countSummary());
+        // this.view.renderCartList(this.model.renderList, this.model.countSummary());
     }
 }
