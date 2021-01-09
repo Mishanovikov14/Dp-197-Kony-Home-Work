@@ -11,7 +11,7 @@ export default class ViewCart {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body modal-cart-body">
-                            <p class="ultramacho"></p>
+                            <p class="test"></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -23,7 +23,7 @@ export default class ViewCart {
         `);
 
         this.htmlCartContent = document.querySelector('#cartDetails .modal-cart-body');
-        this.ultramacho = document.querySelector('#cartDetails .ultramacho');
+        this.test = document.querySelector('#cartDetails .test');
     }
 
     render = ({
@@ -37,6 +37,6 @@ export default class ViewCart {
         price,
         imgLink}) => {
         // this.htmlCartContent.innerHTML = Object.entries(data).map(([name, value]) => `<p>${ name } : ${ value }</p>`).join('');
-        this.ultramacho.innerText = `ID: ${id}`;
+        this.test.innerText = `ID: ${id}`;
     }
 }
