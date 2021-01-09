@@ -88,6 +88,10 @@ h2 {
   min-width: 78px;
 }
 
+.btn-delete {
+  margin-bottom: 1rem;
+}
+
 .product-list--amount {
   justify-content: center;
   margin-bottom: 1rem;

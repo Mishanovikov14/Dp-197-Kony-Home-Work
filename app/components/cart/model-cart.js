@@ -3,9 +3,12 @@ export default class ModelCart {
     uniqList = new Set();
     renderList = [];
 
-    addToCart = product => {
+    addProductToModel = product => {
         this.list.push(product);
         this.uniqList.add(product);
+    }
+
+    addToCart = () => {
         this.renderList = [];
         this.uniqList.forEach(el => {
             const count = this.list.reduce((count, product) => product == el ? ++count : count, 0);
@@ -14,8 +17,6 @@ export default class ModelCart {
                 ...el
             })
         });
-        console.log(this.renderList);
-
     }
 
     countSummary() {
@@ -28,9 +29,23 @@ export default class ModelCart {
     }
 
     substrAmount = id => {
-        const product = this.renderList.find(element => element.id == id.slice(1));
-        product.count--;
+        const productIndex = this.list.indexOf(this.list.find(element => element.id == id.slice(1)));
+        this.list.splice(productIndex, 1);
+    }
+
+    addAmount = id => {
+        const product = this.list.find(element => element.id == id.slice(1));
+        this.list.push(product);
+    }
+
+    deleteProd = id => {
         console.log(this.renderList);
-        return product;
+        const product = this.list.find(element => element.id == id.slice(1));
+        const correctProd = (element) => element === product;
+        while (this.list.some(correctProd)) {
+            const productIndex = this.list.indexOf(product);
+            this.list.splice(productIndex, 1);
+        }
+        console.log(this.renderList);
     }
 }

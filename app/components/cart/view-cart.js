@@ -1,7 +1,10 @@
 export default class ViewCart {
     htmlCartModal = document.querySelector('.modals');
 
-    constructor() {
+    constructor(cbMinus, cbPlus, cbDelete) {
+        this.cbMinus = cbMinus;
+        this.cbPlus = cbPlus;
+        this.cbDelete = cbDelete;
         this.htmlCartBtn = document.querySelector('#btn-cart');
         this.htmlCartModal.innerHTML = `
             <div class="modal fade" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -19,11 +22,20 @@ export default class ViewCart {
                         </div>
                     </div>
                 </div>
-            </div>
-        `;
+            </div> `;
     }
 
-    renderCart = (cartList, sum) => { 
+    renderEmptyCart = () => {
+        const htmlList = document.querySelector('#product-list');
+        htmlList.innerHTML = ``;
+        const msg = document.createElement("h3");
+        msg.classList.add("text-center");
+        msg.innerText = `Your cart is empty`;
+        htmlList.append(msg);
+        document.querySelector('#order').remove();
+    }
+
+    renderCart = () => { 
         this.htmlCartModal.innerHTML = `
         <div class="modal fade" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -32,18 +44,26 @@ export default class ViewCart {
                         <h2 class="modal-title" id="exampleModalLabel">Cart</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body modal-body--cart">
                         <ol id="product-list" class="text-center"></ol>
-                        <h3 class="text-center">Summary: <span class="blue-text">${sum}$</span></h3>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Make an oreder</button>
+                        <button id="order" type="button" class="btn btn-primary">Make an oreder</button>
                     </div>
                 </div>
             </div>
         </div>`;
 
+        this.productList = document.querySelector('#product-list');
+
+        this.productList.addEventListener('click', this.cbMinus);
+        this.productList.addEventListener('click', this.cbPlus);
+        this.productList.addEventListener('click', this.cbDelete);
+        
+    }
+
+    renderList = (cartList, sum) => {
         const htmlList = document.querySelector('#product-list');
         htmlList.innerHTML = ``;
         cartList.forEach(({id, productName, price, count}) => {
@@ -52,18 +72,19 @@ export default class ViewCart {
                 <h5>${productName}</h5>
                 <p>${price}$</p>
                 <div class="d-flex product-list--amount">
-                    <button type="button" class="btn btn-primary btn-amount-minus" data-amount-id="$${ id }">-</button>
-                    <span>${count}</span>
-                    <button type="button" class="btn btn-primary btn-amount-plus" data-amount-id="$${ id }">+</button>
+                    <button type="button" class="btn btn-primary btn-amount-minus" data-minus="$${ id }">-</button>
+                    <input class="text-center" value="${count}">
+                    <button type="button" class="btn btn-primary btn-amount-plus" data-plus="$${ id }">+</button>
                 </div>
+                <button type="button" class="btn btn-danger btn-delete" data-delete="$${ id }">Delete</button>
              `;
             htmlList.append(cartListItem);
         });
-    }
 
-    handle = (remove, add) => {
-        [...this.htmlCartModal.querySelectorAll('.btn-amount-minus')].forEach(btn => btn.addEventListener('click', remove));
-        [...this.htmlCartModal.querySelectorAll('.btn-amount-plus')].forEach(btn => btn.addEventListener('click', add));
+        const sumLi = document.createElement("h3");
+        sumLi.classList.add("text-center");
+        sumLi.innerHTML = `Summary: <span class="blue-text">${sum}$</span>`;
+        htmlList.append(sumLi);
     }
 
     renderCount = count => {
