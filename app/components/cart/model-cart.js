@@ -14,6 +14,8 @@ export default class ModelCart {
                 ...el
             })
         });
+        console.log(this.renderList);
+
     }
 
     countSummary() {
@@ -23,5 +25,12 @@ export default class ModelCart {
         }, 0); 
 
         return summary
+    }
+
+    substrAmount = id => {
+        const product = this.renderList.find(element => element.id == id.slice(1));
+        product.count--;
+        console.log(this.renderList);
+        return product;
     }
 }

@@ -82,7 +82,20 @@ h2 {
 }
 
 .btn-cart {
-  margin-left: 5px;
+  margin: 1rem;
+  margin-right: 3rem;
+  margin-left: 0;
+  min-width: 78px;
+}
+
+.product-list--amount {
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.product-list--amount span {
+  flex-grow: 1;
+  font-size: x-large;
 }
 
 .sk-folding-cube {

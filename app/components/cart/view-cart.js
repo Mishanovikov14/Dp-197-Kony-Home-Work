@@ -2,6 +2,7 @@ export default class ViewCart {
     htmlCartModal = document.querySelector('.modals');
 
     constructor() {
+        this.htmlCartBtn = document.querySelector('#btn-cart');
         this.htmlCartModal.innerHTML = `
             <div class="modal fade" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -20,9 +21,6 @@ export default class ViewCart {
                 </div>
             </div>
         `;
-
-        this.htmlCartBtn = document.querySelector('navbar-btn-container');
-        console.log(this.htmlCartBtn,  this.htmlCartModal);
     }
 
     renderCart = (cartList, sum) => { 
@@ -47,15 +45,25 @@ export default class ViewCart {
         </div>`;
 
         const htmlList = document.querySelector('#product-list');
-        cartList.forEach(({productName, price, count}) => {
+        htmlList.innerHTML = ``;
+        cartList.forEach(({id, productName, price, count}) => {
             const cartListItem = document.createElement('li');
             cartListItem.innerHTML = `
                 <h5>${productName}</h5>
-                <p>${price} $</p>
-                <p>${count}</p>
+                <p>${price}$</p>
+                <div class="d-flex product-list--amount">
+                    <button type="button" class="btn btn-primary btn-amount-minus" data-amount-id="$${ id }">-</button>
+                    <span>${count}</span>
+                    <button type="button" class="btn btn-primary btn-amount-plus" data-amount-id="$${ id }">+</button>
+                </div>
              `;
             htmlList.append(cartListItem);
         });
+    }
+
+    handle = (remove, add) => {
+        [...this.htmlCartModal.querySelectorAll('.btn-amount-minus')].forEach(btn => btn.addEventListener('click', remove));
+        [...this.htmlCartModal.querySelectorAll('.btn-amount-plus')].forEach(btn => btn.addEventListener('click', add));
     }
 
     renderCount = count => {
