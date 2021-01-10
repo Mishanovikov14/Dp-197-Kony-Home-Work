@@ -2,13 +2,15 @@ import ModelCart from "./model-cart.js";
 import ViewCart from "./view-cart.js";
 
 export default class ControllerCart {
-    constructor({ subscribe, events }) {
-        this.view = new ViewCart(this.onMinus, this.onPlus, this.onDelete);
+    constructor({ subscribe, notify, events }) {
+        this.view = new ViewCart(this.onMinus, this.onPlus, this.onDelete, this.onOrder);
         this.model = new ModelCart();
 
         this.events = events;
 
         subscribe(events.INFO_CART, this.initCart);
+
+        this.notify = notify;
     }
 
     initCart = data => {
@@ -45,5 +47,11 @@ export default class ControllerCart {
             this.model.deleteProd(e.target.dataset.delete);
             this.render();
         }
+    }
+
+    onOrder = () => {
+        const order = this.model.validateOrder();
+        order.push({summary: this.model.countSummary()});
+        this.notify(this.events.ORDER_DATA, order);
     }
 }

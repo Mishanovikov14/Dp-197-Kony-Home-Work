@@ -1,10 +1,12 @@
 export default class ViewCart {
     htmlCartModal = document.querySelector('.modals');
 
-    constructor(cbMinus, cbPlus, cbDelete) {
+    constructor(cbMinus, cbPlus, cbDelete, cbOrder, cbSubmit) {
         this.cbMinus = cbMinus;
         this.cbPlus = cbPlus;
         this.cbDelete = cbDelete;
+        this.cbOrder = cbOrder;
+        this.cbSubmit = cbSubmit;
         this.htmlCartBtn = document.querySelector('#btn-cart');
         this.htmlCartModal.innerHTML = `
             <div class="modal fade" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -37,8 +39,8 @@ export default class ViewCart {
 
     renderCart = () => { 
         this.htmlCartModal.innerHTML = `
-        <div class="modal fade" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade cart-modal-window" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div id="cart-modal-window" class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2 class="modal-title" id="exampleModalLabel">Cart</h2>
@@ -49,14 +51,16 @@ export default class ViewCart {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button id="order" type="button" class="btn btn-primary">Make an oreder</button>
+                        <button id="order" type="button" class="btn btn-primary btn-order">Make an oreder</button>
                     </div>
                 </div>
             </div>
         </div>`;
 
         this.productList = document.querySelector('#product-list');
+        this.htmlOrderBtn = document.querySelector('.btn-order');
 
+        this.htmlOrderBtn.addEventListener('click', this.cbOrder);
         this.productList.addEventListener('click', this.cbMinus);
         this.productList.addEventListener('click', this.cbPlus);
         this.productList.addEventListener('click', this.cbDelete);
@@ -80,15 +84,15 @@ export default class ViewCart {
                     <button type="button" class="btn btn-primary btn-amount-plus" data-plus="$${ id }">+</button>
                 </div>
                 <button type="button" class="btn btn-danger btn-delete" data-delete="$${ id }">Delete</button>
-             `;
+            `;
 
              
-             htmlList.append(cartListItem);
-             if (count === amount) {
-                 document.querySelector('.btn-amount-plus').classList.add("disabled");
-                 document.querySelector('.btn-cart-info').classList.add("disabled");
-                 document.querySelector('.btn-info-cart').classList.add("disabled");
-             }
+            htmlList.append(cartListItem);
+            if (count === amount) {
+                document.querySelector('.btn-amount-plus').classList.add("disabled");
+                document.querySelector('.btn-cart-info').classList.add("disabled");
+                document.querySelector('.btn-info-cart').classList.add("disabled");
+            }
         });
 
         const sumLi = document.createElement("h3");

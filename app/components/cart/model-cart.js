@@ -31,7 +31,7 @@ export default class ModelCart {
     substrAmount = id => {
         const productIndex = this.list.indexOf(this.list.find(element => element.id == id.slice(1)));
         this.list.splice(productIndex, 1);
-        this.check();
+        this.checkUniqList();
     }
 
     addAmount = id => {
@@ -39,7 +39,7 @@ export default class ModelCart {
         this.list.push(product);
     }
 
-    check = () => {
+    checkUniqList = () => {
         this.uniqList.forEach((el) => {
             if (!this.list.includes(el)) {
                 this.uniqList.delete(el);
@@ -54,6 +54,13 @@ export default class ModelCart {
             const productIndex = this.list.indexOf(product);
             this.list.splice(productIndex, 1);
         }
-        this.check();
+        this.checkUniqList();
+    }
+
+    validateOrder = () => {
+        const orderList = this.renderList.map(({ count, id }) => {
+            return {count, id};
+        });
+        return orderList;
     }
 }
