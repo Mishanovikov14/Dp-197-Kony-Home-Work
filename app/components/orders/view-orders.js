@@ -45,7 +45,7 @@ export default class ViewOrders {
         return htmlOrderInputs.map(inp => {
             return {
                 value: inp.value,
-                name: inp.dataset.name
+                field: inp.dataset.name
             }
         });
     }

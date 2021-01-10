@@ -12,7 +12,6 @@ export default class ControllerBot {
     }
 
     onSend = msg => {
-        this.model.send(msg);
-        this.notify(this.events.MESSAGE_SENDED);
+        this.model.send(msg).then(() => this.notify(this.events.MESSAGE_SENDED));
     }
 }

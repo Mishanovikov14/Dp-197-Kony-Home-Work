@@ -20,7 +20,6 @@ export default class ControllerRecord {
     init = () => {
         this.model.loadRecords()
             .then(data => {
-            //    this.view.render(data); 
                this.notify(this.events.LOADED_DATA, data);
             });
     }

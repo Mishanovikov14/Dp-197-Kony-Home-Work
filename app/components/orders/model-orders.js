@@ -8,8 +8,8 @@ export default class ModelOrders {
 
     setUserInfo = userInfo => {
         const arr = [];
-        userInfo.forEach(({ name, value }) => {
-            arr.push({name, value});
+        userInfo.forEach(({ field, value }) => {
+            arr.push({field, value});
         });
         this.data.push(arr);
     }

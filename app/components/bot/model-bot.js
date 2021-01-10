@@ -5,6 +5,6 @@ export default class ModelBot {
     }
 
     send = msg => {
-        fetch(`${ this.url }${ msg }`);
+        return fetch(`${ this.url }${ msg }`);
     }
 }
