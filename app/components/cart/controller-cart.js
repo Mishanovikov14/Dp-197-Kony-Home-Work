@@ -6,9 +6,17 @@ export default class ControllerCart {
         this.view = new ViewCart(this.onMinus, this.onPlus, this.onDelete, this.onOrder);
         this.model = new ModelCart();
 
+        // this.CB = {
+        //     minus: this.onMinus,
+        //     plus: this.onPlus,
+        //     delete: this.onDelete,
+        //     order: this.onOrder
+        // }
+        
         this.events = events;
 
         subscribe(events.INFO_CART, this.initCart);
+        subscribe(events.GO_BACK, this.onCart);
 
         this.notify = notify;
     }
@@ -17,6 +25,11 @@ export default class ControllerCart {
         this.model.addProductToModel(data);
         this.model.addToCart();
         this.view.renderCount(this.model.list.length);
+        this.view.renderCart();
+        this.view.renderList(this.model.renderList, this.model.countSummary());
+    }
+
+    onCart = () => {
         this.view.renderCart();
         this.view.renderList(this.model.renderList, this.model.countSummary());
     }

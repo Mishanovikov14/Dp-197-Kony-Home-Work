@@ -26,7 +26,7 @@ export default class ViewRecord {
         return `
         <div class="card-m col-xl-3 col-lg-4 col-md-6 col-xs-12">
           <div class="card h-100">
-            <img src="${imgLink}" class="card-img-top" alt="img">
+            <img src="${imgLink}" class="card-img card-img-top" alt="img">
             <div class="card-body">
               <div class="parent">
                 <h3 class="card-title text-center text-decoration-underline">${ productName }</h3>

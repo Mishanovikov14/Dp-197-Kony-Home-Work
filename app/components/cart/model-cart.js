@@ -58,8 +58,8 @@ export default class ModelCart {
     }
 
     validateOrder = () => {
-        const orderList = this.renderList.map(({ count, id }) => {
-            return {count, id};
+        const orderList = this.renderList.map(({ count, id , price, productName}) => {
+            return {count, id, price, productName};
         });
         return orderList;
     }

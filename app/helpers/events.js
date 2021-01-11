@@ -7,7 +7,8 @@ const events = {
     INFO_CART: 'Add info to cart window',
     ORDER_DATA: 'When data loeded from cart',
     SEND_MESSAGE: 'Send message with order',
-    MESSAGE_SENDED: 'Message sended'
+    MESSAGE_SENDED: 'Message sended',
+    GO_BACK: 'Render cart whith goods'
 };
 
 export default events;

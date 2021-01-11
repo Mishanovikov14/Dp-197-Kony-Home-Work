@@ -1,8 +1,13 @@
 select {
+  min-width: 10rem;
   max-width: 20rem;
   margin: 1rem;
   margin-left: 0;
-  margin-right: 3rem;
+  margin-right: 1rem;
+}
+
+ol, ul {
+  padding-left: 0rem;
 }
 
 .input-search {
@@ -20,7 +25,7 @@ h2 {
 .navbar-brand {
   padding-top: .3125rem;
   padding-bottom: .3125rem;
-  margin-right: 3rem;
+  margin-right: 1rem;
   font-size: 1.25rem;
   text-decoration: none;
   white-space: nowrap;
@@ -77,15 +82,15 @@ h2 {
   min-height: 150px;
 }
 
-.card-img-top {
-  height: 269px;
+.card-img {
+  height: 300px;
 }
 
 .btn-cart {
   margin: 1rem;
-  margin-right: 3rem;
+  margin-right: 1rem;
   margin-left: 0;
-  min-width: 78px;
+  min-width: 87px;
 }
 
 .btn-delete {
@@ -100,6 +105,12 @@ h2 {
 .product-list--amount span {
   flex-grow: 1;
   font-size: x-large;
+}
+
+.order-list-container {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  background-color: rgb(209, 209, 209);
 }
 
 .sk-folding-cube {

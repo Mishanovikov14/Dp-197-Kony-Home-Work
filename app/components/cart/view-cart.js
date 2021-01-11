@@ -1,15 +1,14 @@
 export default class ViewCart {
     htmlCartModal = document.querySelector('.modals');
 
-    constructor(cbMinus, cbPlus, cbDelete, cbOrder, cbSubmit) {
+    constructor(cbMinus, cbPlus, cbDelete, cbOrder) {
         this.cbMinus = cbMinus;
         this.cbPlus = cbPlus;
         this.cbDelete = cbDelete;
         this.cbOrder = cbOrder;
-        this.cbSubmit = cbSubmit;
         this.htmlCartBtn = document.querySelector('#btn-cart');
         this.htmlCartModal.innerHTML = `
-            <div class="modal fade" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade cart-modal-window" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -25,21 +24,32 @@ export default class ViewCart {
                     </div>
                 </div>
             </div> `;
+
+        this.htmlCart = document.querySelector('.cart-modal-window');
     }
 
     renderEmptyCart = () => {
-        const htmlList = document.querySelector('#product-list');
-        htmlList.innerHTML = ``;
-        const msg = document.createElement("h3");
-        msg.classList.add("text-center");
-        msg.innerText = `Your cart is empty`;
-        htmlList.append(msg);
-        document.querySelector('#order').remove();
+        this.htmlCart.innerHTML = ``;
+        this.htmlCart.innerHTML = `
+        <div id="cart-modal-window" class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Cart</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-body--cart">
+                    <h3 class="text-center">Your cart is empty</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div> `;
     }
 
     renderCart = () => { 
-        this.htmlCartModal.innerHTML = `
-        <div class="modal fade cart-modal-window" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        this.htmlCart.innerHTML = ``;
+        this.htmlCart.innerHTML = `
             <div id="cart-modal-window" class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -54,8 +64,7 @@ export default class ViewCart {
                         <button id="order" type="button" class="btn btn-primary btn-order">Make an oreder</button>
                     </div>
                 </div>
-            </div>
-        </div>`;
+            </div>`;
 
         this.productList = document.querySelector('#product-list');
         this.htmlOrderBtn = document.querySelector('.btn-order');
@@ -72,10 +81,12 @@ export default class ViewCart {
         document.querySelector('.btn-info-cart').classList.remove("disabled");
         
         const htmlList = document.querySelector('#product-list');
+
         htmlList.innerHTML = ``;
+
         cartList.forEach(({id, productName, price, count, amount}) => {
-            const cartListItem = document.createElement('li');
-            cartListItem.innerHTML = `
+            htmlList.insertAdjacentHTML('beforeend', `
+            <li>
                 <h5>${productName}</h5>
                 <p>${price}$</p>
                 <div class="d-flex product-list--amount">
@@ -84,10 +95,8 @@ export default class ViewCart {
                     <button type="button" class="btn btn-primary btn-amount-plus" data-plus="$${ id }">+</button>
                 </div>
                 <button type="button" class="btn btn-danger btn-delete" data-delete="$${ id }">Delete</button>
-            `;
+            </li>`);
 
-             
-            htmlList.append(cartListItem);
             if (count === amount) {
                 document.querySelector('.btn-amount-plus').classList.add("disabled");
                 document.querySelector('.btn-cart-info').classList.add("disabled");
@@ -95,10 +104,7 @@ export default class ViewCart {
             }
         });
 
-        const sumLi = document.createElement("h3");
-        sumLi.classList.add("text-center");
-        sumLi.innerHTML = `Summary: <span class="blue-text">${sum}$</span>`;
-        htmlList.append(sumLi);
+        htmlList.insertAdjacentHTML('beforeend', `<h3 class="text-center">Summary: <span class="blue-text">${sum}$</span></h3>`);
     }
 
     renderCount = count => {

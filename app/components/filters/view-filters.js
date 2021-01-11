@@ -27,11 +27,14 @@ export default class ViewFilters {
                                 <option value="price-exp">Expensive first</option>
                                 <option value="price-cheap">Cheap first</option>
                         </select>
-                        <button class="btn btn-outline-danger btn-cart" id="btn-cart" data-bs-toggle="modal" data-bs-target="#cartDetails">Cart (0)</button>
-                    <div class="d-flex">
-                        <input class="form-control me-4 input-search" type="search" placeholder="Search">
-                        <button class="btn btn-outline-danger btn-search">Search</button>
-                    </div>
+                        <div class="d-flex">
+                            <button class="btn btn-outline-danger btn-cart" id="btn-cart" data-bs-toggle="modal" data-bs-target="#cartDetails">Cart (0)</button>
+                            <button class="btn btn-outline-danger btn-cart" id="btn-order-history" data-bs-toggle="modal" data-bs-target="#orderHistory">Orders</button>
+                        </div>
+                        <div class="d-flex">
+                            <input class="form-control me-4 input-search" type="search" placeholder="Search">
+                            <button class="btn btn-outline-danger btn-search">Search</button>
+                        </div>
                 </div>
             </div>
         </nav>`;

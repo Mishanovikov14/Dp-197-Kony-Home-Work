@@ -1,7 +1,8 @@
 export default class ViewOrders {
 
-    constructor(cbSubmit) {
+    constructor(cbSubmit, cbBack) {
         this.cbSubmit = cbSubmit;
+        this.cbBack = cbBack;
     }
 
     renderOrder = () => {
@@ -14,31 +15,34 @@ export default class ViewOrders {
                     <h2 class="modal-title" id="exampleModalLabel">Contact Info</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
-                    <div class="modal-body modal-body--cart">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
-                            <input id="name" type="search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-name="Name" autofocus>
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default">E-mail</span>
-                            <input id="email" type="search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-name="Email">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Phone number</span>
-                            <input id="phone" type="search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-name="Phone">
-                        </div>
+                <div class="modal-body modal-body--cart">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                        <input id="name" type="search" class="form-control" placeholder="Please, enter your name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-name="Name" autofocus>
                     </div>
-                </form>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">E-mail</span>
+                        <input id="email" type="search" class="form-control" placeholder="Please, enter your E-mail" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-name="Email">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Phone number</span>
+                        <input id="phone" type="search" class="form-control" placeholder="Please, enter your phone number" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-name="Phone">
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary btn-order-back">Back</button>
                     <button type="button" class="btn btn-primary btn-order-submit">Submit</button>
                 </div>
             </div>
         </div>`;
 
         const htmlSubmitBtn = document.querySelector('.btn-order-submit');
+        const htmlBackBtn = document.querySelector('.btn-order-back');
+
         htmlSubmitBtn.addEventListener('click', this.cbSubmit);
+        htmlBackBtn.addEventListener('click', this.cbBack);
+
     }
 
     getInputValue = () => {
@@ -71,10 +75,7 @@ export default class ViewOrders {
     }
 
     renderError = (inp, msg) => {
-        if (msg === true) {
-            inp.classList.add('success');
-        } else {
-            inp.classList.add('error');
+        if (msg !== true) {
             inp.value = msg;
         }
     }

@@ -3,7 +3,7 @@ import ViewOrders from "./view-orders.js";
 
 export default class ControllerOrders {
     constructor({subscribe, notify, events}) {
-        this.view = new ViewOrders(this.onSubmit);
+        this.view = new ViewOrders(this.onSubmit, this.onBack);
         this.model = new ModelOrders();
 
         this.events = events;
@@ -31,6 +31,10 @@ export default class ControllerOrders {
                 this.view.onError(result);
             }
         }
+    }
+
+    onBack = () => {
+        this.notify(this.events.GO_BACK);
     }
 
     reload = () => location.reload();
