@@ -20,9 +20,17 @@ export default class ControllerOrders {
     }
 
     onSubmit = () => {
-        this.model.setUserInfo(this.view.getInputValue());
-        this.notify(this.events.SEND_MESSAGE, JSON.stringify(this.model.data));
-        this.model.sendInfoToLocalStorage();
+        const userInfo = this.view.getInputValue();
+        if (userInfo) {
+            const result = this.model.setValidUserInfo(userInfo);
+      
+            if (result.length === 1) {
+                this.notify(this.events.SEND_MESSAGE, JSON.stringify(this.model.data));
+                this.model.sendInfoToLocalStorage();
+            } else {
+                this.view.onError(result);
+            }
+        }
     }
 
     reload = () => location.reload();

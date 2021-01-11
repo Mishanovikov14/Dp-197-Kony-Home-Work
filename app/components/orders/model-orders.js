@@ -6,12 +6,35 @@ export default class ModelOrders {
         this.data.push(order);
     }
 
-    setUserInfo = userInfo => {
-        const arr = [];
-        userInfo.forEach(({ field, value }) => {
-            arr.push({field, value});
-        });
-        this.data.push(arr);
+    setValidUserInfo = ({ name, phone, email }) => {
+        const result = {};
+
+        result.name = this.checkInputData(name, 'Name');
+        result.email = this.checkInputData(email, 'Email');
+        result.phone = this.checkInputData(phone, 'Phone');
+        
+        if (!(Object.values(result).find((el) => typeof el !== 'boolean'))) {
+            this.data[0].push({name, email, phone});
+            return this.data;
+        }
+    
+        return result;
+    }
+
+    checkInputData = (data, type) => {
+        const reg = {
+            Email: /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i,
+            Phone: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/,
+            Name: /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u
+        };
+    
+        let result = `${type} is not valid`;
+    
+        if (reg[type].test(data)) {
+            result = true;
+        }
+    
+        return result;
     }
 
     sendInfoToLocalStorage = () => {
