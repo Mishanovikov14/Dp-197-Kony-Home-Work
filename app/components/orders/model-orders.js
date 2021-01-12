@@ -14,7 +14,7 @@ export default class ModelOrders {
         result.phone = this.checkInputData(phone, 'Phone');
         
         if (!(Object.values(result).find((el) => typeof el !== 'boolean'))) {
-            this.data[0].push({name, email, phone});
+            this.data[0].unshift({name, email, phone});
             return this.data;
         }
     

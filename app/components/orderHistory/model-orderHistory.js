@@ -3,10 +3,9 @@ export default class ModelOrderHistory {
         const history = localStorage.getItem('OrderHistory');
         const historyOrder = JSON.parse(history) ?? [];
         historyOrder.map(el => {
-            el.forEach(e => e.pop());
-            el.forEach(e => e.pop());
+            el.forEach(e => e.shift());
         });
-        console.log(historyOrder);
+
         return historyOrder;
     }
 }

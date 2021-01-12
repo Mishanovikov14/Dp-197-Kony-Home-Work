@@ -11,7 +11,7 @@ export default class ModelPagination {
         return this.records.slice(0, this.cardsOnPage);
     }
 
-    pag = (pageNum) => {
+    pag = pageNum => {
         let start = (pageNum - 1) * this.cardsOnPage;
         let end = start + this.cardsOnPage;
 

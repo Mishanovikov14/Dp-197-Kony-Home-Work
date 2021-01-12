@@ -1,14 +1,18 @@
 import ViewFilters from "./view-filters.js";
 import ModelFilters from "./model-filters.js";
+import Publisher from "../../helpers/publisher.js";
+
 
 export default class ControllerFilters {
-    constructor({ subscribe, events, notify }) {
-        this.view = new ViewFilters(this.onSort, this.onSearch, this.onFilter);
+    constructor() {
+        this.view = new ViewFilters(this.methods);
         this.model = new ModelFilters();
+        this.publisher = new Publisher();
 
-        this.events = events;
-        subscribe(events.LOADED_DATA, this.onLoad);
-        this.notify = notify;
+        this.notify = this.publisher.notify;
+        this.events = this.publisher.events;
+
+        this.publisher.subscribe(this.events.LOADED_DATA, this.onLoad);
     }
 
     onLoad = data => {
@@ -31,5 +35,13 @@ export default class ControllerFilters {
         const records = this.model.filterProduct(e.target.value);
 
         this.notify(this.events.AFTER_FILTER, records);
+    }
+
+    get methods() {
+        return {
+            sort: this.onSort,
+            search: this.onSearch,
+            filter: this.onFilter
+        }
     }
 }

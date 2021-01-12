@@ -1,11 +1,11 @@
 export default class ViewCart {
     htmlCartModal = document.querySelector('.modals');
 
-    constructor(cbMinus, cbPlus, cbDelete, cbOrder) {
-        this.cbMinus = cbMinus;
-        this.cbPlus = cbPlus;
-        this.cbDelete = cbDelete;
-        this.cbOrder = cbOrder;
+    constructor({minus, plus, onDelete, order}) {
+        this.cbMinus = minus;
+        this.cbPlus = plus;
+        this.cbDelete = onDelete;
+        this.cbOrder = order;
         this.htmlCartBtn = document.querySelector('#btn-cart');
         this.htmlCartModal.innerHTML = `
             <div class="modal fade cart-modal-window" id="cartDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -86,16 +86,18 @@ export default class ViewCart {
 
         cartList.forEach(({id, productName, price, count, amount}) => {
             htmlList.insertAdjacentHTML('beforeend', `
-            <li>
-                <h5>${productName}</h5>
-                <p>${price}$</p>
-                <div class="d-flex product-list--amount">
-                    <button type="button" class="btn btn-primary btn-amount-minus" data-minus="$${ id }">-</button>
-                    <span class="text-center">${count}</span>
-                    <button type="button" class="btn btn-primary btn-amount-plus" data-plus="$${ id }">+</button>
-                </div>
-                <button type="button" class="btn btn-danger btn-delete" data-delete="$${ id }">Delete</button>
-            </li>`);
+            <div class="cart-list-container">
+                <li>
+                    <h5>${productName}</h5>
+                    <p>${price}$</p>
+                    <div class="d-flex product-list--amount">
+                        <button type="button" class="btn btn-primary btn-amount-minus" data-minus="$${ id }">-</button>
+                        <span class="text-center">${count}</span>
+                        <button type="button" class="btn btn-primary btn-amount-plus" data-plus="$${ id }">+</button>
+                    </div>
+                    <button type="button" class="btn btn-danger btn-delete" data-delete="$${ id }">Delete</button>
+                </li>
+            </div>`);
 
             if (count === amount) {
                 document.querySelector('.btn-amount-plus').classList.add("disabled");

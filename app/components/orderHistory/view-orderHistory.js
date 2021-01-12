@@ -27,7 +27,7 @@ export default class ViewOrderHistory {
         this.htmlOrderHistoryBtn.addEventListener('click', this.cb);
     }
 
-    renderOrdersList = (orderList) => {
+    renderOrdersList = orderList => {
         
         const htmlList = document.querySelector('#order-list');
         let counter = 0;
@@ -36,7 +36,6 @@ export default class ViewOrderHistory {
 
         orderList.forEach(el => {
             el.forEach(e => {
-                let sum = 0;
 
                 htmlList.insertAdjacentHTML('beforeend', 
                 `<div class="order-list-container">
@@ -45,21 +44,30 @@ export default class ViewOrderHistory {
 
                 const htmlOrderList = document.querySelector(`#order-list-count${counter}`);
 
-                e.forEach(({id, price, count, productName}) => {
-                    
-                    htmlOrderList.insertAdjacentHTML('beforeend', `
-                    <h4>Product name: ${productName}</h4>
-                    <h5>ID: ${id}</h5>
-                    <h5>Price: ${price}$</h5>
-                    <h5>Amount: ${count}</h5>`);
-                    sum += price;
+                e.forEach(obj => {
+                    if (Object.keys(obj).length === 4) {
+                        const {id, price, count, productName } = obj;
+                        htmlOrderList.insertAdjacentHTML('beforeend', `
+                        <h4>Product name: ${productName}</h4>
+                        <h5>ID: ${id}</h5>
+                        <h5>Price: ${price}$</h5>
+                        <h5>Amount: ${count}</h5>`);
+                    }
+
+                    if (Object.keys(obj).length === 1) {
+                        const { summary } = obj;
+                        htmlOrderList.insertAdjacentHTML('beforeend',
+                        `<h3 class="text-center">Summary: <span class="blue-text">${summary}$</span></h3>`
+                        );
+                    }
                 });
 
-                htmlOrderList.insertAdjacentHTML('beforeend',
-                    `<h3 class="text-center">Summary: <span class="blue-text">${sum}$</span></h3>`
-                );
                 counter++;
             });
         });
+    }
+
+    renderEmptyHistory = () => {
+        this.htmlOrderHistory.innerHTML = ``;     
     }
 }

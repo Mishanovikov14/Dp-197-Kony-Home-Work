@@ -1,7 +1,7 @@
 export default class ViewFilters {
     htmlheader = document.querySelector('header');
 
-    constructor(cbSort, cbSearch, cbFilter) {
+    constructor({sort, search, filter}) {
         this.htmlheader.innerHTML = `
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
@@ -31,10 +31,10 @@ export default class ViewFilters {
                             <button class="btn btn-outline-danger btn-cart" id="btn-cart" data-bs-toggle="modal" data-bs-target="#cartDetails">Cart (0)</button>
                             <button class="btn btn-outline-danger btn-cart" id="btn-order-history" data-bs-toggle="modal" data-bs-target="#orderHistory">Orders</button>
                         </div>
-                        <div class="d-flex">
+                        <form class="d-flex">
                             <input class="form-control me-4 input-search" type="search" placeholder="Search">
-                            <button class="btn btn-outline-danger btn-search">Search</button>
-                        </div>
+                            <button type="button" class="btn btn-outline-danger btn-search">Search</button>
+                        </form>
                 </div>
             </div>
         </nav>`;
@@ -43,8 +43,8 @@ export default class ViewFilters {
         this.htmlFilter = document.querySelector('.select-filter');
         this.htmlSearch = document.querySelector('.btn-search');
 
-        this.htmlSort.addEventListener('input', cbSort);
-        this.htmlSearch.addEventListener('click', cbSearch);
-        this.htmlFilter.addEventListener('input', cbFilter);
+        this.htmlSort.addEventListener('input', sort);
+        this.htmlSearch.addEventListener('click', search);
+        this.htmlFilter.addEventListener('input', filter);
     }
 }

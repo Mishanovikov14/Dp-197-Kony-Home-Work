@@ -1,24 +1,18 @@
 import ModelCart from "./model-cart.js";
 import ViewCart from "./view-cart.js";
+import Publisher from "../../helpers/publisher.js";
 
 export default class ControllerCart {
-    constructor({ subscribe, notify, events }) {
-        this.view = new ViewCart(this.onMinus, this.onPlus, this.onDelete, this.onOrder);
+    constructor() {
+        this.view = new ViewCart(this.methods);
         this.model = new ModelCart();
+        this.publisher = new Publisher();
 
-        // this.CB = {
-        //     minus: this.onMinus,
-        //     plus: this.onPlus,
-        //     delete: this.onDelete,
-        //     order: this.onOrder
-        // }
-        
-        this.events = events;
+        this.notify = this.publisher.notify;
+        this.events = this.publisher.events;
 
-        subscribe(events.INFO_CART, this.initCart);
-        subscribe(events.GO_BACK, this.onCart);
-
-        this.notify = notify;
+        this.publisher.subscribe(this.events.INFO_CART, this.initCart);
+        this.publisher.subscribe(this.events.GO_BACK, this.onCart);
     }
 
     initCart = data => {
@@ -66,5 +60,14 @@ export default class ControllerCart {
         const order = this.model.validateOrder();
         order.push({summary: this.model.countSummary()});
         this.notify(this.events.ORDER_DATA, order);
+    }
+
+    get methods() {
+        return {
+            minus: this.onMinus,
+            plus: this.onPlus,
+            onDelete: this.onDelete,
+            order: this.onOrder
+        }
     }
 }

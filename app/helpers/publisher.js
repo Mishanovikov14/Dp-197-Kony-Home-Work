@@ -5,6 +5,11 @@ export default class Publisher {
     constructor() {
         if (typeof Publisher.instance === 'object') return Publisher.instance;
 
+        this.events = events;
+        this.subscribe = this.subscribe;
+        this.unsubscribe = this.unsubscribe;
+        this.notify = this.notify;
+        
         Publisher.instance = this;
 
         return this;
@@ -28,14 +33,5 @@ export default class Publisher {
         }
 
         return this.listeners[eventType];
-    }
-
-    get methods() {
-        return {
-            notify: this.notify,
-            unsubscribe: this.unsubscribe,
-            subscribe: this.subscribe,
-            events
-        }
     }
 }

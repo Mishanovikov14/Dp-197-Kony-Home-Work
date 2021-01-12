@@ -8,7 +8,10 @@ export default class ControllerOrderHistory {
     }
 
     onClick = () => {
-        this.view.renderOrdersList(this.model.getOrders());
-        // this.model.getOrders();
+        if (this.model.getOrders().length === 0) {
+            this.view.renderEmptyHistory();
+        } else {
+            this.view.renderOrdersList(this.model.getOrders());
+        }
     }
 }

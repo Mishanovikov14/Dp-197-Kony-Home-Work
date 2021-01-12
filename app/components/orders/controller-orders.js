@@ -1,17 +1,20 @@
 import ModelOrders from "./model-orders.js";
 import ViewOrders from "./view-orders.js";
+import Publisher from "../../helpers/publisher.js";
+
 
 export default class ControllerOrders {
-    constructor({subscribe, notify, events}) {
+    constructor() {
         this.view = new ViewOrders(this.onSubmit, this.onBack);
         this.model = new ModelOrders();
+        this.publisher = new Publisher();
 
-        this.events = events;
+        this.notify = this.publisher.notify;
+        this.events = this.publisher.events;
 
-        subscribe(events.ORDER_DATA, this.initOrder);
-        subscribe(events.MESSAGE_SENDED, this.reload);
+        this.publisher.subscribe(this.events.ORDER_DATA, this.initOrder);
+        this.publisher.subscribe(this.events.MESSAGE_SENDED, this.reload);
 
-        this.notify = notify;
     }
 
     initOrder = data => {

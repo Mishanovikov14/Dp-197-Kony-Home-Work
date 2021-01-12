@@ -1,13 +1,15 @@
+import Publisher from "../../helpers/publisher.js";
 import ViewSpinner from "./view-spinner.js";
 
 export default class ControllerSpinner {
-    constructor({ subscribe, unsubscribe, events }) {
+    constructor() {
         this.view = new ViewSpinner();
+        this.publisher = new Publisher();
+        this.events = this.publisher.events;
+        this.unsubscribe = this.publisher.unsubscribe;
 
-        subscribe(events.LOADED_DATA, this.onLoad);
-        this.unsubscribe = unsubscribe;
+        this.publisher.subscribe(this.events.LOADED_DATA, this.onLoad);
 
-        this.events = events;
         this.view.render();
     }
 

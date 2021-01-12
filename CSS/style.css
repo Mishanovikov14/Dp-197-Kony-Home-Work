@@ -113,6 +113,20 @@ h2 {
   background-color: rgb(209, 209, 209);
 }
 
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 4rem;
+  background-color: black;
+}
+
+.cart-list-container {
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
 .sk-folding-cube {
     margin: 35vh auto;
     width: 90px;

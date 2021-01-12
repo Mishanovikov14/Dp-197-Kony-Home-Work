@@ -1,25 +1,27 @@
 import ViewPagination from "./view-pagination.js";
 import ModelPagination from "./model-pagination.js";
+import Publisher from "../../helpers/publisher.js";
 
 export default class ControllerPagination {
-    constructor({ subscribe, events, notify }) {
+    constructor() {
         this.view = new ViewPagination();
         this.model = new ModelPagination();
+        this.publisher = new Publisher();
         
-        this.events = events;
+        this.events = this.publisher.events;
 
         this.onSubscribe = type => {
-            subscribe(type, this.onLoad);
-            subscribe(type, this.onStart);
-            subscribe(type, this.onRender);
+            this.publisher.subscribe(type, this.onLoad);
+            this.publisher.subscribe(type, this.onStart);
+            this.publisher.subscribe(type, this.onRender);
         }
 
-        this.onSubscribe(events.LOADED_DATA);
-        this.onSubscribe(events.AFTER_SORT);
-        this.onSubscribe(events.AFTER_SEARCH);
-        this.onSubscribe(events.AFTER_FILTER);
+        this.onSubscribe(this.events.LOADED_DATA);
+        this.onSubscribe(this.events.AFTER_SORT);
+        this.onSubscribe(this.events.AFTER_SEARCH);
+        this.onSubscribe(this.events.AFTER_FILTER);
         
-        this.notify = notify;
+        this.notify = this.publisher.notify;
     }
 
     onLoad = data => {
@@ -37,7 +39,7 @@ export default class ControllerPagination {
         this.view.handle(this.onHandle);
     }
 
-    onHandle = (e) => {
+    onHandle = e => {
         const pages = this.model.pag(e.target.dataset.value);
         this.notify(this.events.PAG, pages);
     }
