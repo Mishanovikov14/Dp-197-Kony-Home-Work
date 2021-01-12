@@ -13,7 +13,7 @@ export default class ViewOrderHistory {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <ol id="order-list" class="text-center">
+                            <ol id="order-list">
                                 <h3 class="text-center">Your history of orders is empty</h3>
                             </ol>
                         </div>
@@ -30,7 +30,7 @@ export default class ViewOrderHistory {
     renderOrdersList = orderList => {
         
         const htmlList = document.querySelector('#order-list');
-        let counter = 0;
+        let counter = 1;
 
         htmlList.innerHTML = ``;
 
@@ -38,8 +38,21 @@ export default class ViewOrderHistory {
             el.forEach(e => {
 
                 htmlList.insertAdjacentHTML('beforeend', 
-                `<div class="order-list-container">
-                    <li id="order-list-count${counter}"></li>
+                `<div class="cart-list-container">
+                    <li id="li${counter}">
+                        <table class="table table-primary table-hover table-bordered border-primary">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" scope="col">Product name</th>
+                                    <th class="text-center" scope="col">ID</th>
+                                    <th class="text-center" scope="col">Price</th>
+                                    <th class="text-center" scope="col">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="order-list-count${counter}">
+                            </tbody>
+                        </table>
+                    </li>
                 </div>`);
 
                 const htmlOrderList = document.querySelector(`#order-list-count${counter}`);
@@ -48,16 +61,20 @@ export default class ViewOrderHistory {
                     if (Object.keys(obj).length === 4) {
                         const {id, price, count, productName } = obj;
                         htmlOrderList.insertAdjacentHTML('beforeend', `
-                        <h4>Product name: ${productName}</h4>
-                        <h5>ID: ${id}</h5>
-                        <h5>Price: ${price}$</h5>
-                        <h5>Amount: ${count}</h5>`);
+                        <tr>
+                            <td class="text-center">${productName}</td>
+                            <td class="text-center">${id}</td>
+                            <td class="text-center">${price}$</td>
+                            <td class="text-center">${count}</td>
+                        </tr>
+                        `);
                     }
 
                     if (Object.keys(obj).length === 1) {
                         const { summary } = obj;
-                        htmlOrderList.insertAdjacentHTML('beforeend',
-                        `<h3 class="text-center">Summary: <span class="blue-text">${summary}$</span></h3>`
+                        const htmlLi = document.querySelector(`#li${counter}`)
+                        htmlLi.insertAdjacentHTML('beforeend',
+                        `<h3 class="text-center">Total price:<span class="blue-text"> ${summary}$</span></h3>`
                         );
                     }
                 });

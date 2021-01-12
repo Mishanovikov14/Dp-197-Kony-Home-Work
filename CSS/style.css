@@ -1,3 +1,19 @@
+
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+}
+
 select {
   min-width: 10rem;
   max-width: 20rem;
@@ -123,7 +139,7 @@ h2 {
 }
 
 .cart-list-container {
-  padding: 2rem;
+  padding: 0 1rem;
   margin-bottom: 2rem;
 }
 
